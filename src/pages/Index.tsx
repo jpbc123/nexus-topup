@@ -4,10 +4,12 @@ import { Footer } from "@/components/layout/Footer";
 import { GameCard } from "@/components/game/GameCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star, Shield, Clock, DollarSign, Headphones } from "lucide-react";
+import { Star, Shield, Clock, DollarSign, Headphones, Award, Users, Zap } from "lucide-react";
 import { games } from "@/data/games";
 import { toast } from "@/hooks/use-toast";
 import heroBanner from "@/assets/hero-banner.jpg";
+import { TrustBadges, LiveChatBubble, RecentPurchaseNotification, PaymentMethods } from "@/components/competitive/EnhancedFeatures";
+import { FlashSales, PromoBanner } from "@/components/competitive/FlashSales";
 
 const Index = () => {
   const [cartItemCount, setCartItemCount] = useState(0);
@@ -65,27 +67,34 @@ const Index = () => {
     {
       icon: Clock,
       title: "Instant Delivery",
-      description: "Get your top-ups delivered within minutes"
+      description: "Get your top-ups delivered within 2 minutes",
+      highlight: "Average: 45 seconds"
     },
     {
       icon: Shield,
-      title: "Secure Payments",
-      description: "100% secure transactions with SSL protection"
+      title: "100% Secure",
+      description: "SSL encrypted transactions with money-back guarantee",
+      highlight: "Bank-level security"
     },
     {
       icon: DollarSign,
-      title: "Best Prices",
-      description: "Lowest prices guaranteed in Malaysia"
+      title: "Lowest Prices",
+      description: "Best prices guaranteed or we'll match competitor rates",
+      highlight: "Price match guarantee"
     },
     {
       icon: Headphones,
-      title: "24/7 Support",
-      description: "Round-the-clock customer support"
+      title: "24/7 Live Support",
+      description: "Real human support available round-the-clock",
+      highlight: "1 min response time"
     }
   ];
 
   return (
     <div className="min-h-screen bg-gaming-gradient">
+      {/* Promo Banner */}
+      <PromoBanner />
+      
       <Header 
         cartItemCount={cartItemCount}
         isLoggedIn={isLoggedIn}
@@ -107,32 +116,63 @@ const Index = () => {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl">
-              <Badge className="mb-6 bg-accent text-accent-foreground">
-                🔥 Malaysia's #1 Gaming Platform
-              </Badge>
+              <div className="flex items-center space-x-4 mb-6">
+                <Badge className="bg-accent text-accent-foreground animate-pulse">
+                  🔥 Malaysia's #1 Gaming Platform
+                </Badge>
+                <Badge className="trust-badge">
+                  <Award className="w-3 h-3 mr-1" />
+                  Trusted by 1M+ Gamers
+                </Badge>
+              </div>
               
               <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
                 Malaysia's Most
-                <span className="text-primary block">Affordable</span>
+                <span className="text-primary block">Affordable & Reliable</span>
                 Gaming Top-Up Platform
               </h1>
               
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Instant delivery, secure payments, and 24/7 support. 
-                Top up your favorite games at the best prices in Malaysia.
+              <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
+                ⚡ Instant delivery in 45 seconds • 🔒 100% secure payments • 💰 Lowest prices guaranteed
               </p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 text-center">
+                <div className="bg-card/50 rounded-lg p-3">
+                  <div className="text-2xl font-bold text-primary">1M+</div>
+                  <div className="text-xs text-muted-foreground">Happy Customers</div>
+                </div>
+                <div className="bg-card/50 rounded-lg p-3">
+                  <div className="text-2xl font-bold text-accent">45s</div>
+                  <div className="text-xs text-muted-foreground">Avg Delivery</div>
+                </div>
+                <div className="bg-card/50 rounded-lg p-3">
+                  <div className="text-2xl font-bold text-primary">24/7</div>
+                  <div className="text-xs text-muted-foreground">Live Support</div>
+                </div>
+                <div className="bg-card/50 rounded-lg p-3">
+                  <div className="text-2xl font-bold text-accent">100%</div>
+                  <div className="text-xs text-muted-foreground">Money Back</div>
+                </div>
+              </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="gaming-button-primary text-lg px-8 py-3">
-                  Browse Games
+                  <Zap className="w-5 h-5 mr-2" />
+                  Start Gaming Now
                 </Button>
-                <Button variant="outline" className="text-lg px-8 py-3 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                  View Promotions
+                <Button className="gaming-button-success text-lg px-8 py-3">
+                  View Flash Sales 🔥
                 </Button>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Trust Badges */}
+        <TrustBadges />
+
+        {/* Flash Sales */}
+        <FlashSales />
 
         {/* Popular Games */}
         <section className="py-16">
@@ -174,17 +214,17 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Why Choose XYZGAMER?
+                Why 1 Million+ Gamers Choose XYZGAMER?
               </h2>
               <p className="text-muted-foreground text-lg">
-                Experience the best gaming top-up service in Malaysia
+                Experience the most trusted gaming top-up service in Malaysia
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {features.map((feature, index) => (
-                <div key={index} className="text-center space-y-4">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                <div key={index} className="text-center space-y-4 gaming-card hover:glow-primary">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto glow-primary">
                     <feature.icon className="h-8 w-8 text-primary" />
                   </div>
                   <h3 className="text-xl font-semibold text-foreground">
@@ -193,9 +233,19 @@ const Index = () => {
                   <p className="text-muted-foreground">
                     {feature.description}
                   </p>
+                  <Badge className="trust-badge">
+                    {feature.highlight}
+                  </Badge>
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Payment Methods */}
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <PaymentMethods />
           </div>
         </section>
 
@@ -266,6 +316,10 @@ const Index = () => {
           </div>
         </section>
       </main>
+      
+      {/* Enhanced Interactive Elements */}
+      <LiveChatBubble />
+      <RecentPurchaseNotification />
       
       <Footer />
     </div>

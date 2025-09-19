@@ -42,8 +42,15 @@ All colors MUST be HSL for proper theming.
     /* Gaming specific colors */
     --gaming-gradient-primary: linear-gradient(135deg, hsl(228 39% 7%), hsl(232 25% 12%));
     --gaming-gradient-accent: linear-gradient(135deg, hsl(195 100% 50%), hsl(38 100% 52%));
+    --gaming-gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
     --gaming-glow: 0 0 20px hsl(195 100% 50% / 0.3);
     --gaming-glow-accent: 0 0 20px hsl(38 100% 52% / 0.3);
+    --gaming-glow-success: 0 0 20px hsl(142 76% 36% / 0.3);
+    
+    /* Competitive enhancement colors */
+    --gaming-success: 142 76% 36%;     /* Green for trust signals */
+    --gaming-warning: 45 100% 51%;     /* Yellow for promotions */
+    --gaming-info: 217 91% 60%;        /* Light blue for info */
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -92,6 +99,18 @@ All colors MUST be HSL for proper theming.
     box-shadow: var(--gaming-glow-accent);
   }
 
+  .gaming-button-success {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    background: var(--gaming-gradient-success);
+    color: white;
+    box-shadow: 0 4px 6px -1px hsl(142 76% 36% / 0.3);
+  }
+
+  .gaming-button-success:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--gaming-glow-success);
+  }
+
   .gaming-input {
     @apply bg-input border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300;
   }
@@ -104,6 +123,74 @@ All colors MUST be HSL for proper theming.
     @apply text-primary;
   }
 
+  /* Competitive Enhancement Classes */
+  .trust-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    background: hsl(var(--gaming-success) / 0.1);
+    color: hsl(var(--gaming-success));
+    border: 1px solid hsl(var(--gaming-success) / 0.3);
+  }
+
+  .promo-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold animate-pulse;
+    background: var(--gaming-gradient-accent);
+    color: hsl(var(--accent-foreground));
+  }
+
+  .flash-sale {
+    @apply relative overflow-hidden;
+    background: linear-gradient(45deg, hsl(var(--gaming-warning)), hsl(var(--accent)));
+    animation: flash-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes flash-glow {
+    0% { box-shadow: 0 0 5px hsl(var(--gaming-warning) / 0.5); }
+    100% { box-shadow: 0 0 20px hsl(var(--gaming-warning) / 0.8), 0 0 30px hsl(var(--accent) / 0.6); }
+  }
+
+  .recent-purchase {
+    @apply fixed bottom-4 left-4 z-50 bg-card border border-primary rounded-lg p-4 shadow-lg;
+    animation: slideInUp 0.5s ease-out, fadeOut 0.5s ease-out 4s forwards;
+  }
+
+  @keyframes slideInUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    to { opacity: 0; transform: translateX(-100%); }
+  }
+
+  /* Live chat bubble */
+  .live-chat-bubble {
+    @apply fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300;
+    background: var(--gaming-gradient-accent);
+    box-shadow: var(--gaming-glow-accent);
+    animation: bounce 2s infinite;
+  }
+
+  .live-chat-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: var(--gaming-glow-accent), 0 0 40px hsl(var(--accent) / 0.6);
+  }
+
+  @keyframes bounce {
+    0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+    40%, 43% { transform: translate3d(0, -10px, 0); }
+    70% { transform: translate3d(0, -5px, 0); }
+    90% { transform: translate3d(0, -2px, 0); }
+  }
+
+  /* Payment method highlights */
+  .payment-method {
+    @apply transition-all duration-300 hover:scale-105 cursor-pointer;
+  }
+
+  .payment-method:hover {
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.5);
+  }
+
   /* Glow effects */
   .glow-primary {
     box-shadow: var(--gaming-glow);
@@ -113,6 +200,10 @@ All colors MUST be HSL for proper theming.
     box-shadow: var(--gaming-glow-accent);
   }
 
+  .glow-success {
+    box-shadow: var(--gaming-glow-success);
+  }
+
   /* Gradients */
   .gradient-primary {
     background: var(--gaming-gradient-primary);
@@ -120,6 +211,10 @@ All colors MUST be HSL for proper theming.
 
   .gradient-accent {
     background: var(--gaming-gradient-accent);
+  }
+
+  .gradient-success {
+    background: var(--gaming-gradient-success);
   }
 }
 
